@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e9f5ff;
+            margin: 0;
+            padding: 0;
+        }
+    
+        h1 {
+            color: #007BFF;
+            text-align: center;
+            margin: 20px 0;
+        }
+    
+        .input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto;
+            max-width: 500px;
+        }
+    
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+    
+        input[type="text"] {
+            padding: 10px;
+            font-size: 16px;
+            width: 100%;
+            max-width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    
+        button {
+            padding: 10px 15px;
+            font-size: 16px;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    
+        button[type="submit"] {
+            background-color: #007BFF;
+        }
+    
+        button:hover {
+            background-color: #0056b3;
+        }
+    
+        .geo-button {
+            background-color: #17a2b8;
+            margin-top: 10px;
+        }
+    
+        .geo-button:hover {
+            background-color: #0d6efd;
+        }
+    
+        .weather-info, .forecast {
+            text-align: center;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+        }
+    
+        .weather-info img, .forecast img {
+            width: 100px;
+        }
+    
+        .forecast {
+            margin-top: 30px;
+        }
+    
+        .forecast h3 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+    
+        .forecast-day {
+            display: inline-block;
+            text-align: center;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            margin: 10px;
+            padding: 15px;
+            width: 130px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .error {
+            color: #d9534f;
+            text-align: center;
+            font-size: 18px;
+            margin: 20px auto;
+        }
+    
+        footer {
+            text-align: center;
+            margin-top: 20px;
+            background-color: #007BFF;
+            padding: 15px;
+            color: white;
+        }
+    
+        footer a {
+            text-decoration: none;
+        }
+    
+        footer button {
+            background-color: #28a745;
+            padding: 10px;
+            font-size: 16px;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    
+        footer button:hover {
+            background-color: #218838;
+        }
+    
+        @media (max-width: 600px) {
+            .forecast-day {
+                width: 100px;
+                padding: 10px;
+            }
+    
+            .weather-info, .forecast {
+                padding: 15px;
+                margin: 10px;
+            }
+    
+            h1 {
+                font-size: 1.5em;
+            }
+    
+            input[type="text"] {
+                max-width: 250px;
+            }
+        }
+    </style> 
+</head>
+<body>
+    <h1>Weather App</h1>
+    <div class="input-container">
+        <form method="get" action="{% url 'weather' %}">
+            <input 
+                type="text" 
+                name="location" 
+                placeholder="Enter a city, zip code, or coordinates" 
+                value="{{ location|default_if_none:'' }}">
+            <input 
+                type="hidden" 
+                id="geo-location" 
+                name="geo_location" 
+                value="{{ geo_location }}">
+            <button type="submit">Get Weather</button>
+        </form>
+        {% if not geo_location %}
+            <button class="geo-button" id="use-location-btn" onclick="getGeoLocation()">Use Current Location</button>
+        {% endif %}
+    </div>
+
+    {% if error %}
+        <div class="error">
+            <p>{{ error }}</p>
+        </div>
+    {% elif weather_data %}
+        <div class="weather-info">
+            <h2>Current Weather in {{ weather_data.location.name }}, {{ weather_data.location.region }}</h2>
+            <img src="https:{{ weather_data.current.condition.icon }}" alt="Weather icon">
+            <p>Temperature: {{ weather_data.current.temp_f }}°F</p>
+            <p>Condition: {{ weather_data.current.condition.text }}</p>
+            <p>Feels Like: {{ weather_data.current.feelslike_f }}°F</p>
+            <p>Wind Speed: {{ weather_data.current.wind_mph }} mph</p>
+            <p>Humidity: {{ weather_data.current.humidity }}%</p>
+        </div>
+
+        {% if forecast %}
+            <div class="forecast">
+                <h3>5-Day Forecast</h3>
+                {% for day in forecast %}
+                    <div class="forecast-day">
+                        <p>{{ day.date }}</p>
+                        <img src="https:{{ day.day.condition.icon }}" alt="Weather icon">
+                        <p>{{ day.day.condition.text }}</p>
+                        <p>Avg Temp: {{ day.day.avgtemp_c }}°C</p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endif %}
+    
+    <footer>
+        <p>Created by Ting Ting Chen Zeng</p>
+        <a href="https://www.linkedin.com/school/pmaccelerator/" target="_blank">
+            <button>PM Accelerator Info</button>
+        </a>
+    </footer>
+
+    <script>
+        function getGeoLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    const lat = position.coords.latitude;
+                    const lon = position.coords.longitude;
+                    document.getElementById('geo-location').value = `${lat},${lon}`;
+                    document.querySelector('form').submit();
+                }, function(error) {
+                    alert("Unable to retrieve location. Please allow location access.");
+                    console.error("Geolocation error:", error.message);
+                });
+            } else {
+                alert("Geolocation is not supported by your browser.");
+            }
+        }
+    </script>
+</body>
+</html>
