@@ -2,24 +2,15 @@
 
 ## Description
 
-WeatherApp is a Django-based web application that provides real-time weather forecasts. The app fetches weather data from an external API and displays it to users based on their input city.
+WeatherApp is a Django-based web application that provides real-time weather forecasts. The app fetches weather data from an external API (Weather API) and displays it to users based on their input city.
 
-This application has been deployed on Heroku for easy access and scalability.
+This application has been deployed on Heroku for easy access (also to test without having to set up a key since that is in the .env file).
 
 ## Features
 
 - Fetches weather data from an external API.
 - Dynamic user interface that updates with current weather conditions.
-- Hosted on Heroku for deployment.
-
-## Requirements
-
-To run this project, make sure you have the following installed:
-
-- Python 3.x
-- Pip (Python package manager)
-- Virtualenv (optional but recommended)
-- Heroku CLI (for deployment)
+- Hosted on [Heroku](https://weathera-1c4f4371d9af.herokuapp.com/) for deployment.
 
 ### Dependencies
 
@@ -37,5 +28,24 @@ Follow these steps to run the app on your local machine:
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/weatherapp.git
+   git clone https://github.com/tin2294/weather-app.git
    cd weatherapp
+
+2. **Set up key**:
+You would need to set up your key [here](https://www.weatherapi.com/) and add it to your .env file at the root of the repository like this:
+    ```WEATHER_API_KEY=your_api_key
+
+3. **Create a virtual environment**:
+You can install the requirements in your virtual environment. To set up the environment:
+    ```python -m venv venv
+    source venv/bin/activate  # On macOS/Linux
+
+Then, to install requirements:
+    ```pip install -r requirements.txt
+
+4. **Start server**:
+    ```python manage.py runserver
+Now you can run the app on http://127.0.0.1:8000/
+
+
+On Heroku, the app has also been deployed so you can access this [link](https://weathera-1c4f4371d9af.herokuapp.com/) directly to run the app.
