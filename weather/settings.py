@@ -33,7 +33,7 @@ SECRET_KEY = "django-insecure-&!z)j0=c^6^0i+y%n8^)&7@xay8hzoio196583jxxd^-!)6k(q
 
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['weathera-1c4f4371d9af.herokuapp.com', 'localhost', '127.0.0.1']
 
 
 # Application definition
