@@ -49,3 +49,8 @@ Now you can run the app on http://127.0.0.1:8000/
 
 
 On Heroku, the app has also been deployed so you can access this [link](https://weathera-1c4f4371d9af.herokuapp.com/) directly to run the app.
+
+
+## DEMO
+
+Here is a [loom](https://www.loom.com/share/9e3428158a0f463385abe6e1dc67407f?sid=20b3f8c4-72ad-4877-b7a2-2023e9658c69) with the demo of this app,
