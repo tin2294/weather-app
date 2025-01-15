@@ -55,4 +55,4 @@ On Heroku, the app has also been deployed so you can access this [link](https://
 
 ## DEMO
 
-Here is a [loom](https://www.loom.com/share/9e3428158a0f463385abe6e1dc67407f?sid=20b3f8c4-72ad-4877-b7a2-2023e9658c69) with the demo of this app,
+Here is a [loom](https://www.loom.com/share/e79cc8db66b443fbbea3b47c5350bf82?sid=8670580b-47a6-426f-8f8e-de7d4a23299a) with the demo of this app,
