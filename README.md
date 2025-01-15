@@ -2,14 +2,16 @@
 
 ## Description
 
-WeatherApp is a Django-based web application that provides real-time weather forecasts. The app fetches weather data from an external API (Weather API) and displays it to users based on their input city.
+WeatherApp is a Django-based web application that provides real-time weather forecasts. The app fetches weather data from an external API (Weather API) and displays it to users based on their input city or their geolocation. Additionally, the user can also save temperatures based on the locations and date ranges they input.
 
 This application has been deployed on Heroku for easy access (also to test without having to set up a key since that is in the .env file).
 
 ## Features
 
 - Fetches weather data from an external API.
-- Dynamic user interface that updates with current weather conditions.
+- Saves temperature data into database based on location and dates entered.
+- Displays saved data
+- Exports saved data
 - Hosted on [Heroku](https://weathera-1c4f4371d9af.herokuapp.com/) for deployment.
 
 ### Dependencies

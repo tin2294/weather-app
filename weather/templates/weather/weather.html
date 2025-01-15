@@ -11,13 +11,13 @@
             margin: 0;
             padding: 0;
         }
-    
+
         h1 {
             color: #007BFF;
             text-align: center;
             margin: 20px 0;
         }
-    
+
         .input-container {
             display: flex;
             flex-direction: column;
@@ -25,14 +25,14 @@
             margin: 20px auto;
             max-width: 500px;
         }
-    
+
         form {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
         }
-    
+
         input[type="text"] {
             padding: 10px;
             font-size: 16px;
@@ -41,7 +41,7 @@
             border-radius: 5px;
             border: 1px solid #ccc;
         }
-    
+
         button {
             padding: 10px 15px;
             font-size: 16px;
@@ -50,24 +50,24 @@
             border-radius: 5px;
             cursor: pointer;
         }
-    
+
         button[type="submit"] {
             background-color: #007BFF;
         }
-    
+
         button:hover {
             background-color: #0056b3;
         }
-    
+
         .geo-button {
             background-color: #17a2b8;
             margin-top: 10px;
         }
-    
+
         .geo-button:hover {
             background-color: #0d6efd;
         }
-    
+
         .weather-info, .forecast {
             text-align: center;
             background-color: #fff;
@@ -77,20 +77,20 @@
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             max-width: 600px;
         }
-    
+
         .weather-info img, .forecast img {
             width: 100px;
         }
-    
+
         .forecast {
             margin-top: 30px;
         }
-    
+
         .forecast h3 {
             margin-bottom: 20px;
             color: #333;
         }
-    
+
         .forecast-day {
             display: inline-block;
             text-align: center;
@@ -101,14 +101,14 @@
             width: 130px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-    
+
         .error {
             color: #d9534f;
             text-align: center;
             font-size: 18px;
             margin: 20px auto;
         }
-    
+
         footer {
             text-align: center;
             margin-top: 20px;
@@ -116,11 +116,11 @@
             padding: 15px;
             color: white;
         }
-    
+
         footer a {
             text-decoration: none;
         }
-    
+
         footer button {
             background-color: #28a745;
             padding: 10px;
@@ -130,26 +130,42 @@
             border-radius: 5px;
             cursor: pointer;
         }
-    
+
         footer button:hover {
             background-color: #218838;
         }
-    
+
+        .links-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .links-container a {
+            font-size: 18px;
+            color: #007BFF;
+            margin: 0 15px;
+            text-decoration: none;
+        }
+
+        .links-container a:hover {
+            text-decoration: underline;
+        }
+
         @media (max-width: 600px) {
             .forecast-day {
                 width: 100px;
                 padding: 10px;
             }
-    
+
             .weather-info, .forecast {
                 padding: 15px;
                 margin: 10px;
             }
-    
+
             h1 {
                 font-size: 1.5em;
             }
-    
+
             input[type="text"] {
                 max-width: 250px;
             }
@@ -207,6 +223,11 @@
         {% endif %}
     {% endif %}
     
+    <div class="links-container">
+        <a href="{% url 'list_weather' %}">View Weather Data</a>
+        <a href="{% url 'create_weather' %}">Add Weather Data</a>
+    </div>
+
     <footer>
         <p>Created by Ting Ting Chen Zeng</p>
         <a href="https://www.linkedin.com/school/pmaccelerator/" target="_blank">
