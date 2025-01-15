@@ -6,4 +6,4 @@ class WeatherData(models.Model):
     temperature = models.FloatField()
 
     def __str__(self):
-        return f"{self.location} - {self.date} - {self.temperature}°C"
+        return f"{self.location} - {self.date} - {self.temperature}°F"
